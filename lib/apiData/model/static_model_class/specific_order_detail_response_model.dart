@@ -49,7 +49,9 @@ class SpecificData {
   int? advanceReceived;
   int? outstandingBalance;
   String? notes;
+  bool? isPaymentDone;
   String? status;
+  String? cancelledReason;
   String? createdAt;
   String? updatedAt;
   String? customerId;
@@ -82,7 +84,9 @@ class SpecificData {
         this.advanceReceived,
         this.outstandingBalance,
         this.notes,
+        this.isPaymentDone,
         this.status,
+        this.cancelledReason,
         this.createdAt,
         this.updatedAt,
         this.customerId,
@@ -115,7 +119,9 @@ class SpecificData {
     advanceReceived = json['advanceReceived'];
     outstandingBalance = json['outstandingBalance'];
     notes = json['notes'];
+    isPaymentDone = json['isPaymentDone'];
     status = json['status'];
+    cancelledReason = json['cancelledReason'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     customerId = json['customerId'];
@@ -150,7 +156,9 @@ class SpecificData {
     data['advanceReceived'] = this.advanceReceived;
     data['outstandingBalance'] = this.outstandingBalance;
     data['notes'] = this.notes;
+    data['isPaymentDone'] = this.isPaymentDone;
     data['status'] = this.status;
+    data['cancelledReason'] = this.cancelledReason;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     data['customerId'] = this.customerId;

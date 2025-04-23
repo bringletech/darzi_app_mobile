@@ -6,8 +6,10 @@ import 'package:darzi/apiData/model/customer_otp_verification_model.dart';
 import 'package:darzi/apiData/model/get_all_tailors_model.dart';
 import 'package:darzi/apiData/model/get_current_customer_list_details_model.dart';
 import 'package:darzi/apiData/model/login_model.dart';
+import 'package:darzi/apiData/model/notification_response_model.dart';
 import 'package:darzi/apiData/model/specific_customer_dress_detail_response_model.dart';
 import 'package:darzi/apiData/model/specific_customer_dress_details_model.dart';
+import 'package:darzi/apiData/model/specific_notification_review_response_model.dart';
 import 'package:darzi/apiData/model/speicific_customer_mearsure_model.dart';
 import 'package:darzi/apiData/model/update_customer_measurement_details_model.dart';
 import 'package:darzi/apiData/model/update_customer_profile.dart';
@@ -453,5 +455,54 @@ class CallService extends GetConnect{
           fontSize: 16.0);
     }
   }
+
+  //17). For Getting Notification
+  Future<NotificationResponseModel> getNotification() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? accessToken = prefs.getString('userToken');
+    print("User Access Token Value is : $accessToken");
+    httpClient.baseUrl = apiBaseUrl;
+    var res = await get('notification/getNotifications', headers: {
+      'accept': 'application/json',
+      'Authorization': "Bearer $accessToken",
+    });
+    print("Notification Response is ${res.statusCode}");
+    if (res.statusCode == 200) {
+      return NotificationResponseModel.fromJson(res.body);
+    } else {
+      throw Fluttertoast.showToast(
+          msg: res.body["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
+  Future<Specific_Notification_Review_Response_Model> getSpecificTailorReviewNotificationDetail(String notificationId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? accessToken = prefs.getString('userToken');
+    print("User Access Token Value is : $accessToken");
+    httpClient.baseUrl = apiBaseUrl;
+    var res = await get('notification/getTailorReviewsByNotificationId/$notificationId/reviews', headers: {
+      'accept': 'application/json',
+      'Authorization': "Bearer $accessToken",
+    });
+    if (res.statusCode == 200) {
+      return Specific_Notification_Review_Response_Model.fromJson(res.body);
+    } else {
+      throw Fluttertoast.showToast(
+          msg: res.body["message"],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
 
 }

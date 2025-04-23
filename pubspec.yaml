@@ -29,6 +29,14 @@ dependencies:
   image_picker: any
   cached_network_image: any
   permission_handler: any
+  firebase_core: any
+  firebase_messaging: any
+  firebase_analytics: any
+  flutter_local_notifications: any
+  url_launcher: ^6.3.1
+  flutter_rating_bar: any
+  geolocator: any
+  month_year_picker: any
 
 
 
